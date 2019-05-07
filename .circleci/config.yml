@@ -1,8 +1,8 @@
 version: 2 # use CircleCI 2.0
 jobs:
-  build:
+  build-nozzle:
     docker:
-      - image: circleci/golang:1.12 #
+      - image: circleci/golang:1.12
     working_directory: /go/src/github.com/cloudfoundry-community/splunk-firehose-nozzle
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
@@ -23,15 +23,12 @@ jobs:
           root: /tmp
           paths:
             - splunk-firehose-nozzle
-      - store_test_results:
-          path: /tmp/cov*/
 
-
-  deploy:
+  deploy-nozzle:
     docker:
-      - image: circleci/golang:1.12 #
+      - image: circleci/golang:1.12
     working_directory: /go/src/github.com/cloudfoundry-community/splunk-firehose-nozzle
-    steps: # steps that comprise the `build` job
+    steps: # steps that comprise the `deploy` job
       - attach_workspace:
           at: /tmp
       - checkout # check out source code to working directory
@@ -57,12 +54,12 @@ jobs:
 
 workflows:
   version: 2
-  build-and-deploy:
+  build-and-deploy-nozzle:
     jobs:
-      - build
-      - deploy:
+      - build-nozzle
+      - deploy-nozzle:
           requires:
-            - build
+            - build-nozzle
           filters:
             branches:
               only: update-ci
