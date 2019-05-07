@@ -10,4 +10,4 @@ sed -i 's@SPLUNK_HOST:.*@'"SPLUNK_HOST: $SPLUNK_HOST"'@' .circleci/ci_nozzle_man
 sed -i 's@SPLUNK_TOKEN:.*@'"SPLUNK_TOKEN: $SPLUNK_TOKEN"'@' .circleci/ci_nozzle_manifest.yml
 sed -i 's@SPLUNK_INDEX:.*@'"SPLUNK_INDEX: $SPLUNK_INDEX"'@' .circleci/ci_nozzle_manifest.yml
 #copy nozzle binary from shared workspace
-cp /tmp/splunk-firehose-nozzle ../
+cp /tmp/splunk-firehose-nozzle .
