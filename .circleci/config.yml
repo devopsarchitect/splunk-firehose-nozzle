@@ -37,7 +37,7 @@ jobs:
           command: |
             curl https://glide.sh/get | sh
             go get -t ./...
-            cp -R /tmp/* .
+            cp -R /tmp/splunk-firehose-nozzle .
       - run:
           name: Deploy Splunk Firehose Nozzle
           command: |
