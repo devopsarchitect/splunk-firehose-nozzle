@@ -24,7 +24,7 @@ jobs:
           paths:
             - splunk-firehose-nozzle
       - store_test_results:
-          path: /tmp/*/coverage.html
+          path: /tmp/cov*/coverage.html
 
 
   deploy:
