@@ -18,6 +18,7 @@ jobs:
           name: Run tests
           command: |
             make testall
+            cp splunk-firehose-nozzle /tmp
       - persist_to_workspace:
           root: /tmp
           paths:
