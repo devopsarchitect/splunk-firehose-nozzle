@@ -23,6 +23,9 @@ jobs:
           root: /tmp
           paths:
             - splunk-firehose-nozzle
+      - store_artifacts:
+          path: /tmp/*/coverage.html
+          destination: testcov
 
   deploy:
     docker:
