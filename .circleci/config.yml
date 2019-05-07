@@ -16,25 +16,27 @@ jobs:
           command: make build
       - run:
           name: Run tests
-          command: make testall
+          command: |
+            make testall
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - splunk-firehose-nozzle
 
   deploy:
     docker:
       - image: circleci/golang:1.12 #
     working_directory: /go/src/github.com/cloudfoundry-community/splunk-firehose-nozzle
     steps: # steps that comprise the `build` job
+      - attach_workspace:
+          at: /tmp
       - checkout # check out source code to working directory
       - run:
           name: Install Dependencies
           command: |
             curl https://glide.sh/get | sh
             go get -t ./...
-      - run:
-          name: Builder
-          command: make build
-      - run:
-          name: Run tests
-          command: make testall
+            cp /tmp/* .
       - run:
           name: Deploy Splunk Firehose Nozzle
           command: |
